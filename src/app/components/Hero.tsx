@@ -133,7 +133,7 @@ export function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.6 }}
-          className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-3xl mx-auto mb-12"
+          className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-2xl mx-auto mb-3 mt-45"
         >
           {[
             { icon: <Award className="w-8 h-8" style={{ color: colorPalette.darkest }} />, value: '8', label: 'Modules Covered' },
@@ -154,7 +154,7 @@ export function Hero() {
         <motion.div
           animate={{ y: [0, 10, 0] }}
           transition={{ duration: 1.5, repeat: Infinity }}
-          className="text-sm"
+          className="text-xl"
           style={{ color: colorPalette.mid }}
         >
           Scroll to explore the tools ↓

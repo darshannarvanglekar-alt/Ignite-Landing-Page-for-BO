@@ -54,7 +54,7 @@ const aiTools = [
 
 export function AIToolsShowcase() {
   return (
-    <div className="w-full py-16 px-4">
+    <div className="w-full py-16 px-4" style={{ backgroundColor: '#e3f2fd' }}>
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}

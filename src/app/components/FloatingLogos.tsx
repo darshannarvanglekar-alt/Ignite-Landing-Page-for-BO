@@ -41,8 +41,8 @@ export function FloatingLogos() {
           <img
             src={logo.src}
             alt={logo.alt}
-            className="w-12 h-12 object-contain"
-            style={{ opacity: 0.15 }}
+            className="w-40 h-40 object-contain"
+            style={{ opacity: 0.20 }}
           />
         </motion.div>
       ))}

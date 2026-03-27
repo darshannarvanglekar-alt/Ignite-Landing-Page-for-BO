@@ -5,7 +5,6 @@ import { Label } from './ui/label';
 import { Button } from './ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select';
 
-// Declare Razorpay type
 declare global {
   interface Window {
     Razorpay: any;
@@ -41,7 +40,6 @@ export function EnrollmentForm({ onPaymentSuccess }: EnrollmentFormProps) {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  // Load Razorpay script
   const loadRazorpayScript = () => {
     return new Promise((resolve) => {
       const script = document.createElement('script');
@@ -63,30 +61,17 @@ export function EnrollmentForm({ onPaymentSuccess }: EnrollmentFormProps) {
 
     const options = {
       key: 'rzp_live_SVil93BbGSPBRb',
-      amount: '1000', // ₹10 in paise (for testing)
+      amount: '19900',
       currency: 'INR',
       name: 'Ignite',
-      description: 'AI tools for Business Owners',
+      description: 'AI Tools for Business Owners',
       image: 'https://ignite-learn.com/wp-content/uploads/2025/04/WhatsApp-Image-2025-04-01-at-4.44.31-PM-1.png',
       handler: (response: any) => {
-        // Payment successful
         console.log('Payment successful:', response);
-        console.log('Calling onPaymentSuccess with payment ID:', response.razorpay_payment_id);
-        console.log('onPaymentSuccess callback exists:', !!onPaymentSuccess);
-
         setIsSubmitting(false);
-
-        // Store payment ID in localStorage
         localStorage.setItem('razorpay_payment_id', response.razorpay_payment_id);
-
-        // Call the success callback
         if (onPaymentSuccess) {
-          console.log('About to call onPaymentSuccess');
           onPaymentSuccess(response.razorpay_payment_id);
-          console.log('onPaymentSuccess called successfully');
-        } else {
-          console.error('onPaymentSuccess callback is not defined');
-          alert('Payment successful but there was an error navigating to success page. Payment ID: ' + response.razorpay_payment_id);
         }
       },
       prefill: {
@@ -95,6 +80,9 @@ export function EnrollmentForm({ onPaymentSuccess }: EnrollmentFormProps) {
         contact: formData.phone,
       },
       notes: {
+        email: formData.email,
+        name: formData.fullName,
+        phone: formData.phone,
         company: formData.company,
         jobTitle: formData.jobTitle,
         businessType: formData.businessType,
@@ -108,12 +96,12 @@ export function EnrollmentForm({ onPaymentSuccess }: EnrollmentFormProps) {
           setIsSubmitting(false);
         },
         escape: true,
-        backdropclose: false
-      }
+        backdropclose: false,
+      },
     };
 
     const rzp1 = new window.Razorpay(options);
-    
+
     rzp1.on('payment.failed', (response: any) => {
       console.error('Payment failed:', response.error);
       alert('Payment failed: ' + response.error.description);
@@ -147,12 +135,10 @@ export function EnrollmentForm({ onPaymentSuccess }: EnrollmentFormProps) {
       });
 
       if (response.ok) {
-        // Store user data in localStorage for Razorpay prefill
         localStorage.setItem("name", formData.fullName);
         localStorage.setItem("email", formData.email);
         localStorage.setItem("phone", formData.phone);
-        
-        // Open Razorpay payment modal
+	formData.phone = formData.phone.replace(/\D/g, '').slice(-10);
         await openRazorpayModal();
       } else {
         console.error("Form submission failed:", await response.text());
@@ -235,7 +221,7 @@ export function EnrollmentForm({ onPaymentSuccess }: EnrollmentFormProps) {
             value={formData.phone}
             onChange={(e) => handleChange('phone', e.target.value)}
             className="bg-white/10 border-white/20 text-white placeholder:text-white/50"
-            placeholder="+1 (555) 123-4567"
+            placeholder="+91 98765 43210"
             disabled={isSubmitting}
           />
         </div>
@@ -256,7 +242,7 @@ export function EnrollmentForm({ onPaymentSuccess }: EnrollmentFormProps) {
         <div className="space-y-2">
           <Label htmlFor="businessType" className="text-white">Business Type *</Label>
           <Select required onValueChange={(value) => handleChange('businessType', value)} disabled={isSubmitting}>
-            <SelectTrigger 
+            <SelectTrigger
               id="businessType"
               className="bg-white/10 border-white/20 text-white"
             >
@@ -278,7 +264,7 @@ export function EnrollmentForm({ onPaymentSuccess }: EnrollmentFormProps) {
         <div className="space-y-2">
           <Label htmlFor="employeeCount" className="text-white">Company Size *</Label>
           <Select required onValueChange={(value) => handleChange('employeeCount', value)} disabled={isSubmitting}>
-            <SelectTrigger 
+            <SelectTrigger
               id="employeeCount"
               className="bg-white/10 border-white/20 text-white"
             >
@@ -300,14 +286,14 @@ export function EnrollmentForm({ onPaymentSuccess }: EnrollmentFormProps) {
           className="w-full text-white font-semibold py-6 rounded-lg text-lg transition-all duration-300 hover:scale-105 shadow-lg disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
           style={{ backgroundColor: colorPalette.dark }}
         >
-          {isSubmitting ? 'Processing...' : 'Proceed to Payment'}
+          {isSubmitting ? 'Processing...' : 'Proceed to Payment — ₹199'}
         </Button>
 
         <div className="flex items-center justify-center gap-2 text-sm" style={{ color: colorPalette.palest }}>
           <span>Powered by</span>
-          <img 
-            src="https://razorpay.com/assets/razorpay-glyph.svg" 
-            alt="Razorpay" 
+          <img
+            src="https://razorpay.com/assets/razorpay-glyph.svg"
+            alt="Razorpay"
             className="h-5 w-auto"
           />
           <span className="font-semibold">Razorpay</span>

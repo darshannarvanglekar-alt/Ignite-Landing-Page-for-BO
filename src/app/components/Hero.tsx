@@ -11,6 +11,80 @@ const colorPalette = {
   palest: '#a9d6e5',
 };
 
+const testimonials = [
+  { src: '/testimonials/testimonial1.png', alt: 'Testimonial 1' },
+  { src: '/testimonials/testimonial2.png', alt: 'Testimonial 2' },
+  { src: '/testimonials/testimonial3.png', alt: 'Testimonial 3' },
+  { src: '/testimonials/testimonial4.png', alt: 'Testimonial 4' },
+  { src: '/testimonials/testimonial5.png', alt: 'Testimonial 5' },
+];
+
+function BackgroundCarousel() {
+  return (
+    <div className="absolute inset-0 overflow-hidden z-0">
+      {/* Grey overlay */}
+      <div className="absolute inset-0 z-10" style={{ backgroundColor: '#e3f2fd', opacity: 0.75 }} />
+
+      {/* Row 1 — scrolls left */}
+      <div className="absolute top-[15%] flex overflow-hidden w-full">
+        <motion.div
+          className="flex gap-6"
+          animate={{ x: ['0%', '-50%'] }}
+          transition={{ duration: 25, repeat: Infinity, ease: 'linear' }}
+        >
+          {[...testimonials, ...testimonials].map((t, i) => (
+            <img
+              key={i}
+              src={t.src}
+              alt={t.alt}
+              className="h-144 w-auto rounded-xl flex-shrink-0"
+              style={{ opacity: 0.6 }}
+            />
+          ))}
+        </motion.div>
+      </div>
+
+      {/* Row 2 — scrolls right */}
+      <div className="absolute top-[45%] flex overflow-hidden w-full">
+        <motion.div
+          className="flex gap-6"
+          animate={{ x: ['-50%', '0%'] }}
+          transition={{ duration: 25, repeat: Infinity, ease: 'linear' }}
+        >
+          {[...testimonials, ...testimonials].map((t, i) => (
+            <img
+              key={i}
+              src={t.src}
+              alt={t.alt}
+              className="h-72 w-auto rounded-xl flex-shrink-0"
+              style={{ opacity: 0.6 }}
+            />
+          ))}
+        </motion.div>
+      </div>
+
+      {/* Row 3 — scrolls left */}
+      <div className="absolute top-[72%] flex overflow-hidden w-full">
+        <motion.div
+          className="flex gap-6"
+          animate={{ x: ['0%', '-50%'] }}
+          transition={{ duration: 25, repeat: Infinity, ease: 'linear' }}
+        >
+          {[...testimonials, ...testimonials].map((t, i) => (
+            <img
+              key={i}
+              src={t.src}
+              alt={t.alt}
+              className="h-40 w-auto rounded-xl flex-shrink-0"
+              style={{ opacity: 0.6 }}
+            />
+          ))}
+        </motion.div>
+      </div>
+    </div>
+  );
+}
+
 export function Hero() {
   const scrollToForm = () => {
     const form = document.getElementById('enrollment-form');
@@ -19,34 +93,14 @@ export function Hero() {
 
   return (
     <div className="relative w-full min-h-[600px] flex flex-col items-center justify-center px-4 py-16 overflow-hidden">
-      {/* Background gradient */}
-      <div
-        className="absolute inset-0 opacity-10"
-        style={{
-          background: `radial-gradient(circle at 30% 50%, ${colorPalette.lighter}, transparent 50%),
-                       radial-gradient(circle at 70% 50%, ${colorPalette.mid}, transparent 50%)`,
-        }}
-      />
 
-      {/* Animated background dots */}
-      <div className="absolute inset-0 overflow-hidden">
-        {[...Array(20)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute w-2 h-2 rounded-full"
-            style={{
-              backgroundColor: colorPalette.lightest,
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-            }}
-            animate={{ y: [0, -30, 0], opacity: [0.3, 0.8, 0.3] }}
-            transition={{ duration: 3 + Math.random() * 2, repeat: Infinity, delay: Math.random() * 2 }}
-          />
-        ))}
-      </div>
+      {/* Testimonials as background */}
+      <BackgroundCarousel />
 
-      <div className="relative z-10 max-w-4xl mx-auto text-center">
-        {/* Logo */}
+      {/* Foreground content */}
+      <div className="relative z-20 max-w-4xl mx-auto text-center">
+
+        {/* Logo — bigger and bolder */}
         <motion.div
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -56,7 +110,8 @@ export function Hero() {
           <img
             src="https://ignite-learn.com/wp-content/uploads/2025/04/WhatsApp-Image-2025-04-01-at-4.44.31-PM-1.png"
             alt="Company Logo"
-            className="h-32 w-auto object-contain"
+            className="h-48 w-auto object-contain"
+            style={{ filter: 'drop-shadow(0 4px 12px rgba(1,42,74,0.3))' }}
           />
         </motion.div>
 
@@ -133,7 +188,7 @@ export function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.6 }}
-          className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-2xl mx-auto mb-3 mt-45"
+          className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-2xl mx-auto mb-3"
         >
           {[
             { icon: <Award className="w-8 h-8" style={{ color: colorPalette.darkest }} />, value: '8', label: 'Modules Covered' },

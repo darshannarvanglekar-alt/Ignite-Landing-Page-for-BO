@@ -4,7 +4,6 @@ import { AIToolsShowcase } from './components/AIToolsShowcase';
 import { EnrollmentForm } from './components/EnrollmentForm';
 import { PaymentSuccess } from './components/PaymentSuccess';
 import { FloatingLogos } from './components/FloatingLogos';
-import { TestimonialsCarousel } from './components/TestimonialsCarousel';
 
 export default function App() {
   const [paymentSuccess, setPaymentSuccess] = useState(false);
@@ -42,8 +41,7 @@ export default function App() {
       <FloatingLogos />
       <Hero />
       <AIToolsShowcase />
-      <TestimonialsCarousel />
-      <div id="enrollment-form" className="py-16 px-4" style={{ backgroundColor: '#e3f2fd' }}>
+      <div id="enrollment-form" className="relative z-10 py-16 px-4" style={{ backgroundColor: '#e3f2fd' }}>
         <EnrollmentForm onPaymentSuccess={handlePaymentSuccess} />
       </div>
       <footer className="py-8 px-4 text-center" style={{ backgroundColor: '#012a4a', color: '#a9d6e5' }}>

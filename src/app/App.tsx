@@ -3,6 +3,8 @@ import { Hero } from './components/Hero';
 import { AIToolsShowcase } from './components/AIToolsShowcase';
 import { EnrollmentForm } from './components/EnrollmentForm';
 import { PaymentSuccess } from './components/PaymentSuccess';
+import { FloatingLogos } from './components/FloatingLogos';
+import { TestimonialsCarousel } from './components/TestimonialsCarousel';
 
 export default function App() {
   const [paymentSuccess, setPaymentSuccess] = useState(false);
@@ -36,9 +38,11 @@ export default function App() {
   }
 
   return (
-    <div className="size-full min-h-screen" style={{ backgroundColor: '#e3f2fd' }}>
+    <div className="size-full min-h-screen relative" style={{ backgroundColor: '#e3f2fd' }}>
+      <FloatingLogos />
       <Hero />
       <AIToolsShowcase />
+      <TestimonialsCarousel />
       <div id="enrollment-form" className="py-16 px-4" style={{ backgroundColor: '#e3f2fd' }}>
         <EnrollmentForm onPaymentSuccess={handlePaymentSuccess} />
       </div>

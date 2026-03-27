@@ -1,11 +1,11 @@
 import { motion } from 'motion/react';
 
 const testimonials = [
-  { src: '/testimonials/testimonial1.jpg', alt: 'Testimonial 1' },
-  { src: '/testimonials/testimonial2.jpg', alt: 'Testimonial 2' },
-  { src: '/testimonials/testimonial3.jpg', alt: 'Testimonial 3' },
-  { src: '/testimonials/testimonial4.jpg', alt: 'Testimonial 4' },
-  { src: '/testimonials/testimonial5.jpg', alt: 'Testimonial 5' },
+  { src: '/testimonials/testimonial1.png', alt: 'Testimonial 1' },
+  { src: '/testimonials/testimonial2.png', alt: 'Testimonial 2' },
+  { src: '/testimonials/testimonial3.png', alt: 'Testimonial 3' },
+  { src: '/testimonials/testimonial4.png', alt: 'Testimonial 4' },
+  { src: '/testimonials/testimonial5.png', alt: 'Testimonial 5' },
 ];
 
 export function TestimonialsCarousel() {
